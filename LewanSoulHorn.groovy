@@ -15,17 +15,22 @@ CSG generate(){
 	def massCentroidZValue = measurments.massCentroidZ
 	def sourceValue = measurments.source
 	def massKgValue = measurments.massKg
-	println "Measurment hornDiameterValue =  "+hornDiameterValue
-	println "Measurment priceValue =  "+priceValue
-	println "Measurment massCentroidYValue =  "+massCentroidYValue
-	println "Measurment massCentroidXValue =  "+massCentroidXValue
-	println "Measurment mountPlateToHornTopValue =  "+mountPlateToHornTopValue
-	println "Measurment massCentroidZValue =  "+massCentroidZValue
-	println "Measurment sourceValue =  "+sourceValue
-	println "Measurment massKgValue =  "+massKgValue
+	def caseHoleDiameterValue = measurments.caseHoleDiameter
+
 	// Stub of a CAD object
-	CSG part = new Cube().toCSG()
-	return part
+	CSG part = new Cylinder(hornDiameterValue/2,mountPlateToHornTopValue).toCSG()
+	def bodyScrew = new Cylinder(	caseHoleDiameterValue/2,
+									measurments.get("caseScrewKeepawayLength")).toCSG()
+						.union( new Cylinder(	measurments.get("caseScrewHeadDiameter")/2,
+									10).toCSG()
+									.movez(measurments.get("caseScrewKeepawayLength")))
+					.movex(measurments.get("topHoleCircleDiameter")/2)
+					.movez(mountPlateToHornTopValue)
+     def screws=[]
+     for(int i=0;i<360;i+=90){
+     	screws.add(bodyScrew.rotz(i))
+     }
+	return CSG.unionAll([part,CSG.unionAll(screws)])
 		.setParameter(size)
 		.setRegenerate({generate()})
 }

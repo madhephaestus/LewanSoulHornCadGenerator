@@ -26,7 +26,12 @@ CSG generate(){
 									.movez(measurments.get("caseScrewKeepawayLength")))
 					.movex(measurments.get("topHoleCircleDiameter")/2)
 					.movez(mountPlateToHornTopValue)
-	def mountScrew = new Cylinder(2.5,10+measurments.get("caseScrewKeepawayLength")).toCSG()
+					
+	def mountScrew = new Cylinder(	1.55,
+									measurments.get("caseScrewKeepawayLength")).toCSG()
+						.union( new Cylinder(	2.6,
+									10).toCSG()
+									.movez(measurments.get("caseScrewKeepawayLength")))
 					.movez(mountPlateToHornTopValue)
      def screws=[]
      for(int i=0;i<360;i+=90){

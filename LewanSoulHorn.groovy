@@ -1,3 +1,5 @@
+import eu.mihosoft.vrl.v3d.CSG
+import eu.mihosoft.vrl.v3d.Cylinder
 import eu.mihosoft.vrl.v3d.parametrics.*;
 CSG generate(){
 	String type= "LewanSoulHorn"

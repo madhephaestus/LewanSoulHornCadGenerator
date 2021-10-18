@@ -4,7 +4,7 @@ import eu.mihosoft.vrl.v3d.parametrics.*;
 CSG generate(){
 	String type= "LewanSoulHorn"
 	if(args==null)
-		args=["round"]
+		args=["round_m3_bolts"]
 	// The variable that stores the current size of this vitamin
 	StringParameter size = new StringParameter(	type+" Default",args.get(0),Vitamins.listVitaminSizes(type))
 	HashMap<String,Object> measurments = Vitamins.getConfiguration( type,size.getStrValue())
@@ -29,11 +29,9 @@ CSG generate(){
 					.movex(measurments.get("topHoleCircleDiameter")/2)
 					.movez(mountPlateToHornTopValue)
 					
-	def mountScrew = new Cylinder(	1.55,
-									measurments.get("caseScrewKeepawayLength")).toCSG()
-						.union( new Cylinder(	2.6,
+	def mountScrew =  new Cylinder(	3.1,
 									10).toCSG()
-									.movez(measurments.get("caseScrewKeepawayLength")))
+									
 					.movez(mountPlateToHornTopValue)
      def screws=[]
      for(int i=0;i<360;i+=90){

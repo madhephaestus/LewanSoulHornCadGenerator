@@ -30,8 +30,8 @@ CSG generate(){
 					.movez(mountPlateToHornTopValue)
 					
 	def mountScrew =  new Cylinder(	3.1,
-									10).toCSG()
-									
+									10+measurments.get("caseScrewKeepawayLength")).toCSG()
+						
 					.movez(mountPlateToHornTopValue)
      def screws=[]
      for(int i=0;i<360;i+=90){
